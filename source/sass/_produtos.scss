@@ -1,0 +1,62 @@
+.produtos{
+	padding-top: 1.5rem;
+	h1{
+		font-size: 1.6rem;
+		font-weight: 300;
+		text-align: center;
+		@media(min-width: 1280px){
+			font-size: 2rem;
+		}
+	}
+	.asgard, .milesman{
+		.content{
+			@extend .col-xs-12;
+		}
+		@include clearfix();
+		padding: 1.2rem 0 ;
+		h1{
+			font-size: 1.3rem;
+			text-align: center;
+			margin-bottom: 1rem;
+			font-weight: 400;
+		}
+		img{
+			margin-bottom: 1rem;
+		}
+		@media(min-width: 1280px){
+			.content{
+				width: 80%;
+				margin: 0 10%;
+			}
+			h1{
+				font-size: 1.6rem;
+			}
+		}
+	}
+	.asgard{
+		width: 100%;
+	}
+	.milesman{
+		background-color: #eee;
+	}
+	@media(min-width: 768px){
+
+		img{
+			width: 50%;
+		}
+		.asgard{
+			img{
+				float: right;
+				margin-left: 1rem;
+			}
+		}
+		.milesman{
+			img{
+				float: left;
+				margin-right: 1rem;
+			}
+		}
+	}
+
+	
+}

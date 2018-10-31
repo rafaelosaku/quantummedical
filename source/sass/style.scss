@@ -1,0 +1,44 @@
+@import "../components/owl-carousel/owl.carousel";
+@import "../components/owl-carousel/owl.theme";
+
+
+@import "../components/components-font-awesome/scss/font-awesome";
+@import "../components/bootstrap/scss/bootstrap";
+@import "variables";
+@import "header";
+@import "footer";
+@import "home";
+@import "produtos";
+@import "contato";
+@import "sharebox";
+
+::selection{
+	background-color: $main-color;
+	color: #FFF;
+}
+.full-width{
+	@include clearfix();
+	width: 100%;
+	margin: 0;
+	padding: .5rem 0;
+}
+
+.background-effect{
+	@include clearfix();
+	background: url(../img/bg-effect.png) center center repeat;
+	padding: 2rem 0;
+}
+
+.fontzero{
+	font-size: 0 !important;
+	display: none !important;
+}
+img{
+	width: 100%;
+}
+
+body{
+	font-family: 'Lato', sans-serif;
+	font-weight: 300;
+	background-color: $background;
+}

@@ -1,0 +1,79 @@
+.main-footer{
+	@extend .col-xs-12;
+	//width: 100%;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	color: $main-color;
+	background-color: $background-footer;
+	margin: 0;
+	.content{
+		@include clearfix();
+		//@extend .col-xs-12;
+		//width: 96%;
+		margin: 0 auto;
+	}
+	h1{
+		font-size: 1.1rem;
+	}
+	.social, .contato, .copy{		
+		width: 100%;
+		float: left;
+	}
+	.social{
+		padding: .5rem 0;
+		border-bottom: 1px solid lighten($main-color, 10%);
+		.social-list{
+			@extend .nav;
+			.social-item{
+				@extend .nav-item;
+				.social-link{
+					@extend .nav-link;
+					color: $main-color;
+				}
+			}
+		}
+	}
+	.contato{
+		padding: .5rem 0;
+		.contato-list{
+			@extend .nav;
+			.contato-item{
+				@extend .nav-item;
+				.contato-link{
+					@extend .nav-link;
+					color: $main-color;
+				}
+			}
+		}
+	}
+	.copy{
+		margin-top: 1.5rem;
+		padding: 1rem 0;
+		color: $main-color;
+		text-align: center;
+		border-top: 1px solid $main-color;
+		.copy-link{
+			@extend .nav-link;
+			color: $main-color;
+		}
+	}
+	@media (min-width: 960px){
+		.social, .contato{
+			width: 49%;
+			float: left;
+			&:first-of-type{
+				margin-right: 2%;
+			}
+		}
+		.social{
+			border-bottom: none;
+		}
+	}
+	@media (min-width: 1280px){
+		.content{
+			width: 80%;
+			margin: 0 10%;
+		}
+
+	}	
+}

@@ -1,0 +1,25 @@
+{
+  "name": "quantummedical",
+  "description": "Site Quantum Medical",
+  "main": "index.js",
+  "authors": [
+    "Rafael Osaku"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "Quantum",
+    "Medical"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "v4.0.0-alpha.4",
+    "components-font-awesome": "^4.6.3"
+  }
+}
