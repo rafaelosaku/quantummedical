@@ -1,7 +1,7 @@
 <?php
 
 // CONFIGURAÇÕES DO SITE #############################
-define('HOME', 'http://localhost/Projetos/quantummedical');
+define('HOME', 'http://localhost/projetos/quantummedical/quantummedical/');
 define('THEME', 'quantummedical');
 define('INCLUDE_PATH', HOME . '/' . 'themes' . '/' . THEME);
 define('REQUIRE_PATH', 'themes' . DIRECTORY_SEPARATOR . THEME);
@@ -61,8 +61,9 @@ $pg_sitekit = INCLUDE_PATH . 'img/sitekit/';
  * Definido as configuraçõs de URL amigável      *
  * ============================================= *
  */
-$getUrl = strip_tags(trim(filter_input(INPUT_GET, 'url', FILTER_DEFAULT)));
-$setUrl = (empty($getUrl) ? 'construcao' : $getUrl);
+$getUrlRaw = filter_input(INPUT_GET, 'url', FILTER_DEFAULT);
+$getUrl = strip_tags(trim((string) $getUrlRaw));
+$setUrl = (empty($getUrl) ? 'home' : $getUrl);
 $Url = explode('/', $setUrl);
 
 switch ($Url[0]):
@@ -110,22 +111,22 @@ switch ($Url[0]):
 endswitch;
 
 // AUTO LOAD DE CLASSES  ############################
-function __autoload($Class) {
+spl_autoload_register(function ($Class) {
     $cDir = ['Conn', 'Helpers', 'Models'];
     $iDir = null;
 
-    foreach ($cDir as $dirName):/* caso haja problema trocar o  . DIRECTORY_SEPARATOR .  por // ou \\ */
-        if (!$iDir && file_exists(__DIR__ . DIRECTORY_SEPARATOR . $dirName . DIRECTORY_SEPARATOR . $Class . '.class.php') && !is_dir($dirName)):
-            include_once (__DIR__ . DIRECTORY_SEPARATOR . $dirName . DIRECTORY_SEPARATOR . $Class . '.class.php');
+    foreach ($cDir as $dirName) {
+        if (!$iDir && file_exists(__DIR__ . DIRECTORY_SEPARATOR . $dirName . DIRECTORY_SEPARATOR . $Class . '.class.php') && !is_dir($dirName)) {
+            include_once __DIR__ . DIRECTORY_SEPARATOR . $dirName . DIRECTORY_SEPARATOR . $Class . '.class.php';
             $iDir = true;
-        endif;
-    endforeach;
+        }
+    }
 
-    if (!$iDir):
+    if (!$iDir) {
         trigger_error("Não foi possível incluir {$Class}.class.php", E_USER_ERROR);
         die;
-    endif;
-}
+    }
+});
 
 // TRATAMENTO DE ERROS   ############################
 // CSS constantes :: Mensagens de Erro ##############

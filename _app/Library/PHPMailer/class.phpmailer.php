@@ -1853,21 +1853,24 @@ class PHPMailer {
       //      return false;
       //    }
       //  }
-      $magic_quotes = get_magic_quotes_runtime();
+      $magic_quotes = 0;
+      if (function_exists('get_magic_quotes_runtime')) {
+        $magic_quotes = get_magic_quotes_runtime();
+      }
       if ($magic_quotes) {
-        if (version_compare(PHP_VERSION, '5.3.0', '<')) {
+        if (function_exists('set_magic_quotes_runtime')) {
           set_magic_quotes_runtime(0);
         } else {
-          ini_set('magic_quotes_runtime', 0); 
+          ini_set('magic_quotes_runtime', 0);
         }
       }
       $file_buffer  = file_get_contents($path);
       $file_buffer  = $this->EncodeString($file_buffer, $encoding);
       if ($magic_quotes) {
-        if (version_compare(PHP_VERSION, '5.3.0', '<')) {
+        if (function_exists('set_magic_quotes_runtime')) {
           set_magic_quotes_runtime($magic_quotes);
         } else {
-          ini_set('magic_quotes_runtime', $magic_quotes); 
+          ini_set('magic_quotes_runtime', $magic_quotes);
         }
       }
       return $file_buffer;
@@ -2047,17 +2050,17 @@ class PHPMailer {
     $eol = "\r\n";
     $escape = '=';
     $output = '';
-    while( list(, $line) = each($lines) ) {
+    foreach ($lines as $line) {
       $linlen = strlen($line);
       $newline = '';
-      for($i = 0; $i < $linlen; $i++) {
-        $c = substr( $line, $i, 1 );
-        $dec = ord( $c );
-        if ( ( $i == 0 ) && ( $dec == 46 ) ) { // convert first point in the line into =2E
+      for ($i = 0; $i < $linlen; $i++) {
+        $c = substr($line, $i, 1);
+        $dec = ord($c);
+        if (($i == 0) && ($dec == 46)) { // convert first point in the line into =2E
           $c = '=2E';
         }
-        if ( $dec == 32 ) {
-          if ( $i == ( $linlen - 1 ) ) { // convert space at eol only
+        if ($dec == 32) {
+          if ($i == ($linlen - 1)) { // convert space at eol only
             $c = '=20';
           } else if ( $space_conv ) {
             $c = '=20';
